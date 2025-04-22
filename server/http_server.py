@@ -10,15 +10,15 @@ servable_dir = os.path.abspath(os.path.join(".", "servableFiles"))
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)    #if the server crashes, the next time
 #the same port can be used, instead of letting it be unusable due to the socket being in TIME_WAIT
-server_socket.bind(("0.0.0.0", 6780)) ############## was localhost
+server_socket.bind(("0.0.0.0", 6780)) 
 
 server_socket.listen(5)        #can take up to 5 connection reqs at a time in the queue
 
-# Get the actual IP address of the machine
+#get the actual IP address of the machine
 try:
-    # This doesn't need to be a real reachable address
+    #this doesn't need to be a real reachable address
     temp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    temp_sock.connect(("8.8.8.8", 80))  # Connect to a dummy external IP
+    temp_sock.connect(("8.8.8.8", 80))  #connect to a dummy external IP
     local_ip = temp_sock.getsockname()[0]
     temp_sock.close()
 except Exception:
@@ -246,7 +246,7 @@ def main():
             
             threading.Thread(target=handle_client, args=(client_socket, address)).start()
     except KeyboardInterrupt:
-        print("\nShutting down the server gracefully...")
+        print("\nshutting down the server gracefully...Bye from Keystone!\n")
         server_socket.close()
 
     

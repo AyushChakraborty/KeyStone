@@ -10,3 +10,5 @@ python3 -m client.browser
 ```python
 python3 -m server.http_server
 ```
+
+### make sure that the server and clients are on the same network

@@ -60,3 +60,9 @@ TODO:
         multi threaded handling of clients       DONE
         handle errors properly(404, 500)         DONE
         TLS encryption
+
+also to know which IP is used by the server, we need to simulate outbound traffic from it
+and hence open a new socket for this server to get which IP is actually used by the server.
+Here the server is bound to all interfaces "0.0.0.0" which makes it listen to all available 
+network interfaces. The temp socket opened up is a UDP socket, and its connected to some 
+random server say Googles DNS for now, and from this outbound traffic we get the IP of this server
