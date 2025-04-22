@@ -1,0 +1,62 @@
+http works on top of tcp and not raw ip, hence raw tcp sockets must be used 
+
+parallel channels for data and control info transfer, hence 2 different socket connections needed
+    : one for http data like GET, POST etc req and res
+    : one for control messages like errors, keep-alive signals etc
+need to coordinate these these socket connections
+
+client-server interaction works as such:
+    handshake -> control info -> actual data exchange
+    
+to handle malformed reqs, use validator module to return appropriate http status codes
+
+
+
+for more to read:
+    http/1.1 RFC: https://datatracker.ietf.org/doc/html/rfc2616
+    
+
+
+more on sockets here:
+
+TCP sockets are a form of network based IPC(inter process communication). Recall that IPC can be of many forms like
+pipes, shared memory, message queues, signals. Server and client codes are still processes running in their respective machines hence they are processes too at the end of the day and hence need communcation between them
+
+client sockets are used only for one exchange and after connect() and it sends a req and receives a res and after that it dies, client sockets only live for one exchange
+
+there are two ways communcation can be done for client sockets, use send() or recv() functions or transform the client socket to a file object and use read(), write() and this is how sockets in java are treated. Just keep in mind that when we need to read from this socket as a response to the client, be sure to flush the buffered file else the response will never come 
+
+before calling close() on a socket, call shutdown() on it, which makes it that it wont send any further messages but is still open to  listen. Egs is, a client sends a message through its socket and then calls shutdown(1) which makes it such that it wont send any more messages but is open to listening to them from the client 
+
+python does garbage collect the sockets when not used and also closes it before doing so, but this may lead to other sockets that might be connected to it hanging, hence calling close() is needed and enough to even handle the shutdown() functionality
+
+
+
+TODO:
+    ~~parallel sockets for data and control info(data: get, post etc, control info: errors, metadata)~~ sticking to standard http with one socket for now
+    
+    send the data from the client some bytes at a time:  DONE
+    
+    read the data from the client some bytes at a time:  DONE
+    
+    format responses sent by client in formatter.py:     DONE
+    
+    parse the formatted req by client in server side in parser.py:  DONE
+    
+    handle GET, POST, maybe even some more reqs                     DONE
+    
+    make router like dispatcher(/ for homepage, /echo for echoing content, /info to return server metadata
+    /filename to return some static file to the client)             DONE
+    
+    every req and res must be logged in logger.py, with             DONE
+        timestamp
+        method
+        dispatcher
+        res code
+        clientIP
+        
+    ADVANCED:
+        add connection(keep-alive) support
+        multi threaded handling of clients       DONE
+        handle errors properly(404, 500)         DONE
+        TLS encryption

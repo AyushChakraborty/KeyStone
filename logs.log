@@ -1,0 +1,76 @@
+[2025-04-22 09:13:09] REQUEST: GET /cool.txt HTTP/1.1
+Host: 127.0.0.1
+[2025-04-22 09:13:09] RESPONSE: HTTP/1.1 200 OK
+Server: keystone
+Date: 2025-04-22 09:13:09.008314
+Content-Type: text/plain
+
+this is something cool nice
+
+
+----------------------------------
+[2025-04-22 09:19:30] REQUEST: GET /cool.txt HTTP/1.1
+Host: 127.0.0.1
+[2025-04-22 09:19:30] RESPONSE: HTTP/1.1 200 OK
+Server: keystone
+Date: 2025-04-22 09:19:30.073025
+Content-Type: text/plain
+
+this is something cool nice
+
+
+----------------------------------
+[2025-04-22 09:20:13] REQUEST: GET /save HTTP/1.1
+Host: 127.0.0.1
+Content-Type: text/plain
+Content-Length: 11
+
+hello there
+
+
+[2025-04-22 09:20:13] RESPONSE: HTTP/1.1 201 Created
+Server: keystone
+Date: 2025-04-22 09:20:13.230657
+Content-Type: default
+
+data written successfully to /servableFiles/posted_info.txt
+
+
+----------------------------------
+[2025-04-22 09:20:28] REQUEST: GET /echo HTTP/1.1
+Host: 127.0.0.1
+[2025-04-22 09:20:28] RESPONSE: HTTP/1.1 200 OK
+Server: keystone
+Date: 2025-04-22 09:20:28.275581
+Content-Type: default
+
+hello there
+
+written at: 2025-04-22 09:20:13.229907
+--------------------------
+
+
+
+----------------------------------
+[2025-04-22 09:20:50] REQUEST: GET /delete HTTP/1.1
+Host: 127.0.0.1
+[2025-04-22 09:20:50] RESPONSE: HTTP/1.1 404 Not Found
+Server: keystone
+Date: 2025-04-22 09:20:50.467513
+Content-Type: default
+
+File already empty
+
+
+----------------------------------
+[2025-04-22 09:20:55] REQUEST: GET /echo HTTP/1.1
+Host: 127.0.0.1
+[2025-04-22 09:20:55] RESPONSE: HTTP/1.1 204 No Context
+Server: keystone
+Date: 2025-04-22 09:20:55.946620
+Content-Type: default
+
+File is empty
+
+
+----------------------------------
